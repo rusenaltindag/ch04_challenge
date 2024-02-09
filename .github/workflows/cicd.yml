@@ -34,7 +34,7 @@ jobs:
           with:
             name: Output
         - name: Test ${{env.ARTIFACT_NAME}}
-          run: if [ "$(cat ${{env.ARTIFACT_NAME}})" = "Hello World!!" ]; then echo "File content matches the string."; else echo "File content does not match the string."; fi
+          run: if [ "$(cat ${{env.ARTIFACT_NAME}})" = "Hello World!" ]; then echo "File content matches the string."; else echo "File content does not match the string."; fi
 
           
 
