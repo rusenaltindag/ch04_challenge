@@ -2,6 +2,8 @@ name: Simple CI/CD
 
 on: [ push ]
 
+env:
+  ARTIFACT_NAME: output.txt
 
 jobs:
   test:
@@ -14,12 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-      - name: Create Artifact
+      - name: Checkout code
         uses: actions/checkout@v1
-        run: python hello.py > output.txt
       - name: Upload artifacts
+        run: python hello.py > output.txt
+      - name: Create Artifact
         uses: actions/upload-artifact@v1.0.0
         with:
-          name: output.txt
-          path: output.txt
+          name: output
+          path: ./${{env.ARTIFACT_NAME}}
     
