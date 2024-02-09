@@ -25,4 +25,17 @@ jobs:
         with:
           name: Output
           path: ./${{env.ARTIFACT_NAME}}
+  test-artifact:
+      runs-on: ubuntu-latest
+      needs: [test, build]
+      steps:
+        - name: Download artifact
+          uses: actions/download-artifact@v1.0.0 
+          with:
+            name: Output
+        - name: Test ${{env.ARTIFACT_NAME}}
+          run: if [ "$(cat ${{env.ARTIFACT_NAME}})" = "Hello World!!" ]; then echo "File content matches the string."; else echo "File content does not match the string."; fi
+
+          
+
     
